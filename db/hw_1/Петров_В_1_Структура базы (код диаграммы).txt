@@ -1,0 +1,63 @@
+Table customers {
+  id integer [primary key]
+  first_name varchar [not null]
+  last_name varchar
+  gender_id integer [not null]
+  dob date
+  job_title varchar
+  job_industry_category varchar
+  wealth_segment_id integer [not null]
+  owns_car boolean [not null]
+  address_id integer [not null]
+}
+
+Table genders {
+  id integer [primary key]
+  name varchar
+}
+
+Table wealth_segments {
+  id integer [primary key]
+  name varchar
+}
+
+Table addresses {
+  id integer [primary key]
+  address varchar [not null]
+  postcode integer [not null]
+  state varchar [not null]
+  coutry varchar [not null]
+  property_valuation integer [not null]
+}
+
+Table transactions {
+  id intger [primary key]
+  product_id integer
+  product_info_id integer
+  customer_id integer
+  transaction_date date
+  online_order boolean
+  order_status_id integer
+  list_price decimal
+}
+
+Table order_statuses {
+  id integer
+  name varchar
+}
+
+Table product_infos {
+  id integer
+  brand varchar
+  line varchar
+  product_class varchar
+  standart_cost decimal
+}
+
+Ref: customers.gender_id > genders.id
+Ref: customers.wealth_segment_id > wealth_segments.id
+Ref: customers.address_id > addresses.id
+Ref: transactions.customer_id > customers.id
+Ref: transactions.order_status_id > order_statuses.id
+Ref: transactions.product_info_id > product_infos.id
+
